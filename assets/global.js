@@ -910,10 +910,12 @@ class VariantSelects extends HTMLElement {
   updateOptions() {
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
     this.options.map((ops, index)=>{
-      if(index === 0){
-        document.querySelector('input[type=radio][value="'+ops+'"]').click();
-      }else{
-        document.querySelector('input[type=radio][value="'+ops+'"]').click();
+      if(ops){
+        if(index === 0){
+          document.querySelector('input[type=radio][value="'+ops+'"]').click();
+        }else{
+          document.querySelector('input[type=radio][value="'+ops+'"]').click();
+        }
       }
       
     })
