@@ -43,17 +43,6 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
-            if(formData.get('id') == '45263486353707'){
-              formData.append('id', '45262436761899');
-              fetch(`${routes.cart_add_url}`, config)
-              .then((response) => response.json())
-              .then((response) => {
-                console.log(response)
-              })
-              .catch((e) => {
-                console.error(e);
-              })
-            }
             if (response.status) {
               publish(PUB_SUB_EVENTS.cartError, {
                 source: 'product-form',
