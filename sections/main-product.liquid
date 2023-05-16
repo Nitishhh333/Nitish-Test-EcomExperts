@@ -490,6 +490,11 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      //product size varian change on load
+      var select = document.querySelector('select[name="options[Size]"]');
+      select.value = "Unselected";
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      //product size varian change on load end
       function isIE() {
         const ua = window.navigator.userAgent;
         const msie = ua.indexOf('MSIE ');
