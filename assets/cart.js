@@ -6,6 +6,14 @@ class CartRemoveButton extends HTMLElement {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
       cartItems.updateQuantity(this.dataset.index, 0);
+      if(this.dataset.vid == '45263486353707'){
+        const link = document.querySelector('cart-remove-button[data-vid="45262436761899"]');
+        let vid = link.getAttribute('data-index');
+        setTimeout(()=>{
+          cartItems.updateQuantity(vid, 0);
+        },1500)
+      }
+      
     });
   }
 }
@@ -126,6 +134,7 @@ class CartItems extends HTMLElement {
           );
         });
         const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
+        console.log(parsedState.items)
         let message = '';
         if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
           if (typeof updatedValue === 'undefined') {
