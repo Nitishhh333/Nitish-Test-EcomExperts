@@ -13,7 +13,7 @@ Usage:
   {%- if block.settings.picker_type == 'button' -%}
     {%- for optiontitle in product.options_with_values -%}
       {%- if optiontitle.name == 'Size' -%}
-        <variant-selects
+        <custom-radioselects
           id="variant-selects-{{ section.id }}"
           class="no-js-hidden"
           data-section="{{ section.id }}"
@@ -40,11 +40,11 @@ Usage:
           <script type="application/json">
             {{ product.variants | json }}
           </script>
-        </variant-selects>
+        </custom-radioselects>
       {%- endif -%}
 
       {%- if optiontitle.name == 'Color' -%}
-        <variant-radios
+        <custom-radiobtns
           id="variant-radios-{{ section.id }}"
           class="no-js-hidden"
           data-section="{{ section.id }}"
@@ -59,7 +59,7 @@ Usage:
           <script type="application/json">
             {{ product.variants | json }}
           </script>
-        </variant-radios>
+        </custom-radiobtns>
       {%- endif -%}
     {%- endfor -%}
 
