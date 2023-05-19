@@ -1,3 +1,7 @@
+
+document.querySelector('[name="options[Size]"]').addEventListener('change', function(){
+    document.querySelector('.product-variant-id').value = ''
+})
 document.addEventListener('DOMContentLoaded', function () {
     
     //product size varian change on load
