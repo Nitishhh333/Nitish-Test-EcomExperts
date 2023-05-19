@@ -30,6 +30,7 @@ if (!customElements.get('product-form')) {
         delete config.headers['Content-Type'];
 
         const formData = new FormData(this.form);
+        
         if (this.cart) {
           formData.append(
             'sections',
@@ -43,6 +44,10 @@ if (!customElements.get('product-form')) {
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
+            if(!formData.get('id')){
+              this.handleErrorMessage("Please Select atleast Size Option")
+              return;
+            }
             if(formData.get('id') == '45263486353707'){
               formData.append('id', '45262436761899');
               fetch(`${routes.cart_add_url}`, config)

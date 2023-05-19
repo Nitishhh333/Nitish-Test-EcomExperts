@@ -30,6 +30,9 @@ Usage:
                   class="select__select"
                   name="options[{{ option.name | escape }}]"
                   form="{{ product_form_id }}">
+                  {% if forloop.index0 == 1 %}
+                    <option value="Unselected">unselected</option>
+                  {% endif %}
                   {% render 'product-variant-options', product: product, option: option, block: block, optionname: optiontitle.name %}
                 </select>
                 {% render 'icon-caret' %}
@@ -106,8 +109,9 @@ Usage:
         id="Variants-{{ section.id }}"
         class="select__select"
         form="{{ product_form_id }}">
+        <option value="Unselected" selected="selected">Unselected</option>
         {%- for variant in product.variants -%}
-          <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}{% if variant.available == false %}disabled{% endif %} value="{{ variant.id }}">
+          <option {% if variant.available == false %}disabled{% endif %} value="{{ variant.id }}">
             {%- liquid
               echo variant.title
               echo variant.price | money | strip_html | prepend: ' - '

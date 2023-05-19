@@ -1,4 +1,25 @@
-
+document.addEventListener('DOMContentLoaded', function () {
+    
+    //product size varian change on load
+    var select = document.querySelector('select[name="options[Size]"]');
+    select.value = "Unselected";
+    select.text = "Unselected";
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    if(select.value == 'Unselected'){
+        document.querySelector('.product-variant-id').value = '';
+    }
+    //product size varian change on load end
+});
+function displayerror(msg = null){
+    var errorMessageWrapper = document.querySelector('.product-form__error-message-wrapper');
+    var errorMessage = msg;
+    if (!errorMessageWrapper) return;
+    errorMessage = errorMessage || errorMessageWrapper.querySelector('.product-form__error-message');
+    errorMessageWrapper.toggleAttribute('hidden', !errorMessage);
+    if (errorMessage) {
+        errorMessageWrapper.querySelector('.product-form__error-message').textContent = errorMessage;
+    }
+}
 class CustomVariantRadios extends VariantRadios {
     constructor() {
       super();
@@ -33,7 +54,6 @@ class CustomVariantSelects extends VariantSelects {
     updateOptions() {
         this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
         this.options.map((ops, index)=>{
-            console.log(ops)
             if(ops){
                 if(index === 0){
                     document.querySelector('input[type=radio][value="'+ops+'"]').click();
@@ -43,6 +63,17 @@ class CustomVariantSelects extends VariantSelects {
             }
             
         })
+    }
+    updateVariantInput() {
+        const productForms = document.querySelectorAll(
+          `#product-form-${this.dataset.section}, #product-form-installment-${this.dataset.section}`
+        );
+        productForms.forEach((productForm) => {
+          const input = productForm.querySelector('input[name="id"]');
+          input.value = this.currentVariant.id;
+          input.dataset.val = this.currentVariant.id;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        });
     }
 }
 if (!customElements.get('custom-radioselects')) {
