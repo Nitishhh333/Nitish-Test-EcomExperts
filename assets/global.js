@@ -1092,6 +1092,13 @@ class VariantSelects extends HTMLElement {
     if (price) price.classList.add('visibility-hidden');
     if (inventory) inventory.classList.add('visibility-hidden');
     if (sku) sku.classList.add('visibility-hidden');
+    var selectedValue = document.querySelector('select[name="options[Size]"]').value;
+    if (selectedValue == 'Unselected') {
+      const button = document.getElementById(`product-form-${this.dataset.section}`);
+      const addButtonText = button.querySelector('[name="add"] > span');
+      addButtonText.textContent = 'Add to cart';
+      return;
+    }
   }
 
   getVariantData() {

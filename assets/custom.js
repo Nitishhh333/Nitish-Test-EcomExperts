@@ -50,6 +50,7 @@ class CustomVariantRadios extends VariantRadios {
                 select.dispatchEvent(new Event('change', { bubbles: true }));
             }
 
+
         })
     }
 }
@@ -67,7 +68,10 @@ class CustomVariantSelects extends VariantSelects {
         this.options.map((ops, index) => {
             if (ops) {
                 if (ops == 'Unselected') {
+                    document.querySelector('input[type=radio][value="' + ops + '"]').click();
                     this.toggleAddButton(true, '', false);
+                    // console.log(`${this.dataset.section}`);
+                    return;
                 } else {
 
                     if (index === 0) {
@@ -104,13 +108,6 @@ class CustomVariantSelects extends VariantSelects {
             input.dataset.val = this.currentVariant.id;
             input.dispatchEvent(new Event('change', { bubbles: true }));
         });
-    }
-    setUnavailable() {
-        var selectedValue = document.querySelector('select[name="options[Size]"]').value;
-        if (selectedValue == 'Unselected') {
-            return;
-        }
-
     }
 
 }
