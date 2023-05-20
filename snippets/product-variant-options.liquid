@@ -1,18 +1,18 @@
 {% comment %}
-Renders product variant options
+  Renders product variant options
 
-Accepts:
-- product: {Object} product object.
-- option: {Object} current product_option object.
-- block: {Object} block object.
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
 
 
-Usage:
-{% render 'product-variant-options',
-product: product,
-option: option,
-block: block
-%}
+  Usage:
+  {% render 'product-variant-options',
+    product: product,
+    option: option,
+    block: block
+  %}
 {% endcomment %}
 {%- liquid
   assign variants_available_arr = product.variants | map: 'available'
@@ -46,41 +46,32 @@ block: block
   -%}
 
   {%- if block.settings.picker_type == 'button' -%}
-    {%- if optionname == 'Size' -%}
-      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
-        {% if option_disabled -%}
-          {{- value -}}
-          {% comment %} {{- 'products.product.value_unavailable' | t: option_value: value -}} {% endcomment %}
-        {%- else -%}
-          {{- value -}}
-        {%- endif %}
-      </option>
-    {%- elsif optionname == 'Color' -%}
-      <div class="swatch {{ value | escape | downcase }}">
-        <input
-          type="radio"
-          id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-          name="{{ option.name }}"
-          value="{{ value | escape }}"
-          form="{{ product_form_id }}"
-          {% if option.selected_value == value %}checked{% endif %}
-          {% if option_disabled %}class="disabled"{% endif %}>
-        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-          {% comment %} {{ value -}} {% endcomment %}
-          
-          <svg class="icon icon-checkmark color-foreground-text" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 9" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.35.643a.5.5 0 01.006.707l-6.77 6.886a.5.5 0 01-.719-.006L.638 4.845a.5.5 0 11.724-.69l2.872 3.011 6.41-6.517a.5.5 0 01.707-.006h-.001z" fill="currentColor"></path>
-          </svg>
-          <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
-        </label>
-      </div>
-
-    {%- endif -%}
+    <input
+      type="radio"
+      id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+      name="{{ option.name }}"
+      value="{{ value | escape }}"
+      form="{{ product_form_id }}"
+      {% if option.selected_value == value %}
+        checked
+      {% endif %}
+      {% if option_disabled %}
+        class="disabled"
+      {% endif %}
+    >
+    <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+      {{ value -}}
+      <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
+    </label>
   {%- elsif block.settings.picker_type == 'dropdown' -%}
-    <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+    <option
+      value="{{ value | escape }}"
+      {% if option.selected_value == value %}
+        selected="selected"
+      {% endif %}
+    >
       {% if option_disabled -%}
-        {% comment %} {{- 'products.product.value_unavailable' | t: option_value: value -}} {% endcomment %}
-        {{- value -}}
+        {{- 'products.product.value_unavailable' | t: option_value: value -}}
       {%- else -%}
         {{- value -}}
       {%- endif %}
