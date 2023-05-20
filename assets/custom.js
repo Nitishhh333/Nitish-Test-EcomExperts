@@ -1,22 +1,25 @@
 
-document.querySelector('[name="options[Size]"]').addEventListener('change', function () {
-    document.querySelector('.product-variant-id').value = ''
-})
+if (document.querySelector('[name="options[Size]"]') != null) {
+    document.querySelector('[name="options[Size]"]').addEventListener('change', function () {
+        document.querySelector('.product-variant-id').value = ''
+    })
+}
 
 
 document.addEventListener('DOMContentLoaded', function () {
-
     //product size varian change on load
     selectreset();
     //product size varian change on load end
 });
 function selectreset() {
     var select = document.querySelector('select[name="options[Size]"]');
-    select.value = "Unselected";
-    select.text = "Unselected";
-    select.dispatchEvent(new Event('change', { bubbles: true }));
-    if (select.value == 'Unselected') {
-        document.querySelector('.product-variant-id').value = '';
+    if (select != null) {
+        select.value = "Unselected";
+        select.text = "Unselected";
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        if (select.value == 'Unselected') {
+            document.querySelector('.product-variant-id').value = '';
+        }
     }
 }
 function displayerror(msg = null) {
@@ -42,15 +45,19 @@ class CustomVariantRadios extends VariantRadios {
 
             if (index === 0) {
                 var select = document.querySelector('select[name="options[Color]"]');
-                select.value = ops;
-                select.dispatchEvent(new Event('change', { bubbles: true }));
+                if (select != null) {
+
+                    select.value = ops;
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                }
             } else {
                 var select = document.querySelector('select[name="options[Size]"]');
-                select.value = ops;
-                select.dispatchEvent(new Event('change', { bubbles: true }));
+                if (select != null) {
+
+                    select.value = ops;
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                }
             }
-
-
         })
     }
 }
@@ -68,11 +75,11 @@ class CustomVariantSelects extends VariantSelects {
         this.options.map((ops, index) => {
             if (ops) {
                 if (ops == 'Unselected') {
-                    document.querySelector('input[type=radio][value="' + ops + '"]').click();
+                    // document.querySelector('input[type=radio][value="' + ops + '"]').click();
+                    // use above commented code to set first default variant
                     this.toggleAddButton(true, '', false);
-                    // console.log(`${this.dataset.section}`);
                     return;
-                } else {
+                } else if (ops) {
 
                     if (index === 0) {
                         document.querySelector('input[type=radio][value="' + ops + '"]').click();
