@@ -727,7 +727,7 @@ class SlideshowComponent extends SliderComponent {
       [this.prevButton, this.nextButton].forEach((button) => {
         button.addEventListener('click', () => {
           this.announcementBarArrowButtonWasClicked = true;
-        }, {once: true});
+        }, { once: true });
       });
     }
 
@@ -872,7 +872,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -1009,8 +1009,7 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
@@ -1123,20 +1122,7 @@ class VariantRadios extends VariantSelects {
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
-    
-    // document.querySelector('select[name="options[Color]"]').value = this.option;
-    // this.options.map((ops, index)=>{
-    //   if(index === 0){
-    //     var select = document.querySelector('select[name="options[Color]"]');
-    //     select.value = ops;
-    //     select.dispatchEvent(new Event('change', { bubbles: true }));
-    //   }else {
-    //     var select = document.querySelector('select[name="options[Size]"]');
-    //     select.value = ops;
-    //     select.dispatchEvent(new Event('change', { bubbles: true }));
-    //   }
-      
-    // })
+
   }
 }
 
