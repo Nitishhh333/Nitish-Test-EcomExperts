@@ -1046,10 +1046,19 @@ class VariantSelects extends HTMLElement {
           inventoryDestination.classList.toggle('visibility-hidden', inventorySource.innerText === '');
 
         const addButtonUpdated = html.getElementById(`ProductSubmitButton-${sectionId}`);
-        this.toggleAddButton(
-          addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
-          window.variantStrings.soldOut
-        );
+        var selectedValue = document.querySelector('select[name="options[Size]"]').value;
+        if (selectedValue == 'Unselected') {
+          this.toggleAddButton(
+            addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
+            'Add to cart'
+          );
+        } else {
+          this.toggleAddButton(
+            addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
+            window.variantStrings.soldOut
+          );
+        }
+
 
         publish(PUB_SUB_EVENTS.variantChange, {
           data: {

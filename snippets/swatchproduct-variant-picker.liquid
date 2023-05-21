@@ -31,7 +31,7 @@ Usage:
                   name="options[{{ option.name | escape }}]"
                   form="{{ product_form_id }}">
                   {% if forloop.index0 == 1 %}
-                    <option value="Unselected">unselected</option>
+                    <option value="Unselected">-- Unselected --</option>
                   {% endif %}
                   {% render 'swatchproduct-variant-options', product: product, option: option, block: block, optionname: optiontitle.name %}
                 </select>

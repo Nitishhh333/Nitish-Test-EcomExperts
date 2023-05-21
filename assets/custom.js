@@ -1,7 +1,7 @@
 
 if (document.querySelector('[name="options[Size]"]') != null) {
     document.querySelector('[name="options[Size]"]').addEventListener('change', function () {
-        document.querySelector('.product-variant-id').value = ''
+        document.querySelector('.product-variant-id').value = '';
     })
 }
 
@@ -14,12 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function selectreset() {
     var select = document.querySelector('select[name="options[Size]"]');
     if (select != null) {
-        select.value = "Unselected";
-        select.text = "Unselected";
+        select.selectedIndex = 0
         select.dispatchEvent(new Event('change', { bubbles: true }));
-        if (select.value == 'Unselected') {
-            document.querySelector('.product-variant-id').value = '';
-        }
     }
 }
 function displayerror(msg = null) {
@@ -75,14 +71,16 @@ class CustomVariantSelects extends VariantSelects {
         this.options.map((ops, index) => {
             if (ops) {
                 if (ops == 'Unselected') {
-                    // document.querySelector('input[type=radio][value="' + ops + '"]').click();
+                    document.querySelector('input[type=radio][value="' + ops + '"]').click();
                     // use above commented code to set first default variant
                     this.toggleAddButton(true, '', false);
+                    // disable buton
                     return;
                 } else if (ops) {
 
                     if (index === 0) {
                         document.querySelector('input[type=radio][value="' + ops + '"]').click();
+                        // trigger variant via click
                     } else {
                         document.querySelector('input[type=radio][value="' + ops + '"]').click();
                     }

@@ -47,7 +47,9 @@ block: block
 
   {%- if block.settings.picker_type == 'button' -%}
     {%- if optionname == 'Size' -%}
-      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+      {% assign vid = value | escape %}
+      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected" {% endif %}
+      {%- if vid == 'Unselected'-%} hidden {%- endif -%}>
         {% if option_disabled -%}
           {{- value -}}
           {% comment %} {{- 'products.product.value_unavailable' | t: option_value: value -}} {% endcomment %}
