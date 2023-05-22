@@ -5,7 +5,11 @@ if (document.querySelector('[name="options[Size]"]') != null) {
     })
 }
 
-
+document.addEventListener('load', function () {
+    //product size varian change on load
+    selectreset(); 
+    //product size varian change on load end
+});
 document.addEventListener('DOMContentLoaded', function () {
     //product size varian change on load
     selectreset();
