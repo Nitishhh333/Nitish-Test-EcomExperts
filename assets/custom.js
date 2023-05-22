@@ -10,7 +10,7 @@ document.addEventListener('load', function () {
     console.log('page fully loaded');
     setTimeout(() => {
         selectreset(); 
-    }, 100);
+    }, 600);
     //product size varian change on load end
 });
 document.addEventListener('DOMContentLoaded', function () {
