@@ -7,6 +7,7 @@ if (document.querySelector('[name="options[Size]"]') != null) {
 
 document.addEventListener('load', function () {
     //product size varian change on load
+    console.log('page fully loaded');
     selectreset(); 
     //product size varian change on load end
 });
